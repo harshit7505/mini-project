@@ -1,0 +1,127 @@
+import { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
+import { toast } from 'react-hot-toast';
+
+const Signup = () => {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: '',
+        role: 'seeker'
+    });
+    const { register } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await register(formData);
+            toast.success('Registration successful');
+            navigate('/');
+        } catch (err) {
+            toast.error(err.response?.data?.message || 'Registration failed');
+        }
+    };
+
+    return (
+        <div className="flex min-h-[80vh] flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
+            <div className="sm:mx-auto sm:w-full sm:max-w-md">
+                <h2 className="mt-6 text-center text-3xl font-extrabold tracking-tight text-gray-900">
+                    Create new account
+                </h2>
+                <p className="mt-2 text-center text-sm text-gray-600">
+                    Or{' '}
+                    <Link to="/login" className="font-medium text-blue-600 hover:text-blue-500">
+                        sign in to your existing account
+                    </Link>
+                </p>
+            </div>
+
+            <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+                <div className="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
+                    <form className="space-y-6" onSubmit={handleSubmit}>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Full Name</label>
+                            <div className="mt-1">
+                                <input
+                                    type="text"
+                                    required
+                                    value={formData.name}
+                                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+                                />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Email address</label>
+                            <div className="mt-1">
+                                <input
+                                    type="email"
+                                    required
+                                    value={formData.email}
+                                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+                                />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Password</label>
+                            <div className="mt-1">
+                                <input
+                                    type="password"
+                                    required
+                                    minLength="6"
+                                    value={formData.password}
+                                    onChange={(e) => setFormData({...formData, password: e.target.value})}
+                                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+                                />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">I am a:</label>
+                            <div className="flex items-center space-x-6">
+                                <label className="flex items-center">
+                                    <input
+                                        type="radio"
+                                        name="role"
+                                        value="seeker"
+                                        checked={formData.role === 'seeker'}
+                                        onChange={(e) => setFormData({...formData, role: e.target.value})}
+                                        className="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500"
+                                    />
+                                    <span className="ml-2 text-sm text-gray-700">Job Seeker</span>
+                                </label>
+                                <label className="flex items-center">
+                                    <input
+                                        type="radio"
+                                        name="role"
+                                        value="recruiter"
+                                        checked={formData.role === 'recruiter'}
+                                        onChange={(e) => setFormData({...formData, role: e.target.value})}
+                                        className="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500"
+                                    />
+                                    <span className="ml-2 text-sm text-gray-700">Recruiter / Employer</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <button
+                                type="submit"
+                                className="flex w-full justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                            >
+                                Sign up
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Signup;
