@@ -76,7 +76,6 @@ const getAppliedJobs = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
-// Export controller functions
 
 module.exports = {
     applyForJob,
