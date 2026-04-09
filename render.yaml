@@ -1,6 +1,7 @@
 services:
   - type: web
     name: mern-job-portal
+    plan: free
     env: node
     buildCommand: npm run build
     startCommand: npm start
