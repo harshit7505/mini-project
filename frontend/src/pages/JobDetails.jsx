@@ -12,7 +12,7 @@ const JobDetails = () => {
     const [job, setJob] = useState(null);
     const [loading, setLoading] = useState(true);
     const [applying, setApplying] = useState(false);
-    const [customResumeUrl, setCustomResumeUrl] = useState('');
+    const [resumeFile, setResumeFile] = useState(null);
 
     useEffect(() => {
         const fetchJob = async () => {
@@ -42,7 +42,17 @@ const JobDetails = () => {
 
         try {
             setApplying(true);
-            await axios.post(`/api/jobs/${id}/apply`, { resumeUrl: customResumeUrl });
+            
+            const formData = new FormData();
+            if (resumeFile) {
+                formData.append('resumeFile', resumeFile);
+            }
+
+            await axios.post(`/api/jobs/${id}/apply`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
             toast.success('Successfully applied for this job!');
             // Ideally we'd reflect this state locally to prevent double clicks
         } catch (error) {
@@ -94,13 +104,15 @@ const JobDetails = () => {
                         </div>
                         <div className="flex flex-col gap-3 min-w-[250px]">
                             {user && user.role === 'seeker' && (
-                                <input
-                                    type="url"
-                                    placeholder="Portfolio/Resume Link (Optional)"
-                                    value={customResumeUrl}
-                                    onChange={(e) => setCustomResumeUrl(e.target.value)}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm"
-                                />
+                                <div className="space-y-1">
+                                    <label className="block text-sm font-medium text-gray-700">Upload Resume (Optional)</label>
+                                    <input
+                                        type="file"
+                                        accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                                        onChange={(e) => setResumeFile(e.target.files[0])}
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm bg-white cursor-pointer"
+                                    />
+                                </div>
                             )}
                             <button
                                 onClick={handleApply}

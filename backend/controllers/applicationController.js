@@ -23,10 +23,16 @@ const applyForJob = async (req, res) => {
             return res.status(400).json({ message: 'You have already applied for this job' });
         }
 
+        // First try to use the uploaded file URL from Cloudinary (req.file.path)
+        let finalResumeUrl = req.user.profile?.resumeUrl || req.body.resumeUrl || 'Not Provided';
+        if (req.file && req.file.path) {
+            finalResumeUrl = req.file.path;
+        }
+
         const application = await Application.create({
             job: jobId,
             applicant: req.user.id,
-            resumeUrl: req.user.profile?.resumeUrl || req.body.resumeUrl || 'Not Provided'
+            resumeUrl: finalResumeUrl
         });
 
         res.status(201).json(application);
