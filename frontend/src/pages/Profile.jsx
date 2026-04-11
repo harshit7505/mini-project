@@ -10,17 +10,16 @@ const Profile = () => {
     const [formData, setFormData] = useState({
         name: '',
         skills: '',
-        resumeUrl: '',
         companyName: '',
         companyDescription: ''
     });
+    const [resumeFile, setResumeFile] = useState(null);
 
     useEffect(() => {
         if (user) {
             setFormData({
                 name: user.name || '',
                 skills: user.profile?.skills?.join(', ') || '',
-                resumeUrl: user.profile?.resumeUrl || '',
                 companyName: user.profile?.companyName || '',
                 companyDescription: user.profile?.companyDescription || ''
             });
@@ -31,9 +30,27 @@ const Profile = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            await axios.put('/api/users/profile', formData);
+            const submitData = new FormData();
+            submitData.append('name', formData.name);
+            
+            if (user.role === 'seeker') {
+                submitData.append('skills', formData.skills);
+                if (resumeFile) {
+                    submitData.append('resumeFile', resumeFile);
+                }
+            } else if (user.role === 'recruiter') {
+                submitData.append('companyName', formData.companyName);
+                submitData.append('companyDescription', formData.companyDescription);
+            }
+
+            await axios.put('/api/users/profile', submitData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
             toast.success('Profile updated successfully');
             fetchUser(); // Refresh user data
+            setResumeFile(null); // Clear file input
         } catch (error) {
             toast.error(error.response?.data?.message || 'Failed to update profile');
         } finally {
@@ -105,15 +122,22 @@ const Profile = () => {
                                 </div>
                                 <div>
                                     <label className="flex items-center text-sm font-medium text-gray-700 mb-1">
-                                        <FileText className="w-4 h-4 mr-1 text-gray-500" /> Resume URL
+                                        <FileText className="w-4 h-4 mr-1 text-gray-500" /> Resume (PDF/Doc)
                                     </label>
                                     <input
-                                        type="url"
-                                        placeholder="Link to your resume (Google Drive, Dropbox, etc.)"
-                                        value={formData.resumeUrl}
-                                        onChange={(e) => setFormData({...formData, resumeUrl: e.target.value})}
-                                        className="block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                        type="file"
+                                        accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                                        onChange={(e) => setResumeFile(e.target.files[0])}
+                                        className="block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm bg-white"
                                     />
+                                    {user.profile?.resumeUrl && (
+                                        <div className="mt-2 text-sm">
+                                            <span className="text-gray-500">Current Resume: </span>
+                                            <a href={user.profile.resumeUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline inline-flex items-center">
+                                                View Saved File <ExternalLink className="h-3 w-3 ml-1" />
+                                            </a>
+                                        </div>
+                                    )}
                                 </div>
                             </>
                         )}

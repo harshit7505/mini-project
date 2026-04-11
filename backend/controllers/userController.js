@@ -42,7 +42,12 @@ const updateUserProfile = async (req, res) => {
             // Update profile fields based on role
             if (user.role === 'seeker') {
                 user.profile.skills = req.body.skills ? req.body.skills.split(',').map(skill => skill.trim()) : user.profile.skills;
-                user.profile.resumeUrl = req.body.resumeUrl || user.profile.resumeUrl;
+                
+                if (req.file && req.file.path) {
+                    user.profile.resumeUrl = req.file.path;
+                } else if (req.body.resumeUrl) {
+                    user.profile.resumeUrl = req.body.resumeUrl;
+                }
             } else if (user.role === 'recruiter') {
                 user.profile.companyName = req.body.companyName || user.profile.companyName;
                 user.profile.companyDescription = req.body.companyDescription || user.profile.companyDescription;
