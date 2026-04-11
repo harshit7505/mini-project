@@ -12,6 +12,7 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: 'job-portal-resumes',
+    resource_type: 'auto',
     allowed_formats: ['jpg', 'jpeg', 'png', 'pdf', 'doc', 'docx'],
   },
 });
