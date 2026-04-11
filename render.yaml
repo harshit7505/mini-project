@@ -14,3 +14,9 @@ services:
         sync: false
       - key: JWT_SECRET
         generateValue: true
+      - key: CLOUDINARY_CLOUD_NAME
+        value: domr4puou
+      - key: CLOUDINARY_API_KEY
+        value: '421781126298211'
+      - key: CLOUDINARY_API_SECRET
+        sync: false
