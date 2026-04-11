@@ -130,9 +130,9 @@ const ViewApplicants = () => {
                                 <h4 className="text-sm font-medium text-gray-700 mb-2 flex items-center">
                                     <FileText className="h-4 w-4 mr-2" /> Resume
                                 </h4>
-                                {app.resumeUrl || app.applicant.profile?.resumeUrl ? (
+                                {((app.resumeUrl && app.resumeUrl !== 'Not Provided') || app.applicant?.profile?.resumeUrl) ? (
                                     <a 
-                                        href={app.resumeUrl || app.applicant.profile?.resumeUrl} 
+                                        href={app.resumeUrl !== 'Not Provided' ? app.resumeUrl : app.applicant.profile.resumeUrl} 
                                         target="_blank" 
                                         rel="noopener noreferrer"
                                         className="inline-flex items-center text-sm text-blue-600 hover:text-blue-800 transition bg-blue-50 px-3 py-2 rounded-md"
