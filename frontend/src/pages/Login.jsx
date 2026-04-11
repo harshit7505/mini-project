@@ -2,11 +2,12 @@ import { useState, useContext } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { toast } from 'react-hot-toast';
+import { GoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { login } = useContext(AuthContext);
+    const { login, googleLogin } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -76,6 +77,35 @@ const Login = () => {
                             </button>
                         </div>
                     </form>
+
+                    <div className="mt-6">
+                        <div className="relative">
+                            <div className="absolute inset-0 flex items-center">
+                                <div className="w-full border-t border-gray-300" />
+                            </div>
+                            <div className="relative flex justify-center text-sm">
+                                <span className="bg-white px-2 text-gray-500">Or continue with</span>
+                            </div>
+                        </div>
+
+                        <div className="mt-6 flex justify-center w-full">
+                            <GoogleLogin 
+                                onSuccess={async (credentialResponse) => {
+                                    try {
+                                        await googleLogin(credentialResponse.credential);
+                                        toast.success('Logged in successfully via Google');
+                                        navigate(from, { replace: true });
+                                    } catch (err) {
+                                        toast.error(err.response?.data?.message || 'Google Login failed');
+                                    }
+                                }}
+                                onError={() => {
+                                    toast.error('Google Login failed');
+                                }}
+                                useOneTap
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
