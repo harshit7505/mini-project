@@ -10,9 +10,28 @@ cloudinary.config({
 
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
-  params: {
-    folder: 'job-portal-resumes',
-    resource_type: 'auto'
+  params: async (req, file) => {
+    // Extract original extension correctly
+    const ext = file.originalname.split('.').pop().toLowerCase();
+    
+    let params = {
+      folder: 'job-portal-resumes',
+      resource_type: 'auto'
+    };
+
+    // If it's a PDF, Cloudinary requires format: 'pdf' to render properly 
+    // and keep the .pdf extension in the URL.
+    if (ext === 'pdf') {
+      params.format = 'pdf';
+      params.resource_type = 'image'; // Cloudinary handles PDFs under 'image' resource type when formatted
+    } 
+    // For other documents, use raw to prevent image conversion attempts
+    else if (['doc', 'docx', 'txt'].includes(ext)) {
+      params.resource_type = 'raw';
+      params.format = ext;
+    }
+    
+    return params;
   },
 });
 
