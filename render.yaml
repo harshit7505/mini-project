@@ -19,4 +19,4 @@ services:
       - key: CLOUDINARY_API_KEY
         value: '421781126298211'
       - key: CLOUDINARY_API_SECRET
-        sync: false
+        value: '9uCTkJ2jeVJQMQ0mzs3kF7IF2vc'
