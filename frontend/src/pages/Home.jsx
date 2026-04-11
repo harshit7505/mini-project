@@ -5,20 +5,21 @@ const Home = () => {
     return (
         <div>
             {/* Hero Section */}
-            <div className="bg-gradient-to-r from-blue-700 to-blue-900 text-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+            <div className="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white relative overflow-hidden">
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 relative z-10">
                     <div className="text-center">
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
+                        <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-100 to-indigo-200 drop-shadow-sm">
                             Find Your Dream Job Today
                         </h1>
-                        <p className="mt-4 text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto mb-10">
+                        <p className="mt-4 text-xl md:text-2xl text-indigo-200/90 max-w-3xl mx-auto mb-10 font-light">
                             Connecting talented professionals with top companies. Explore thousands of job opportunities.
                         </p>
-                        <div className="flex flex-col sm:flex-row justify-center gap-4">
-                            <Link to="/jobs" className="bg-white text-blue-700 hover:bg-gray-50 font-bold py-3 px-8 rounded-full text-lg shadow-lg transition duration-200">
+                        <div className="flex flex-col sm:flex-row justify-center gap-5">
+                            <Link to="/jobs" className="bg-white text-indigo-900 hover:bg-indigo-50 font-semibold py-3.5 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                                 Browse Jobs
                             </Link>
-                            <Link to="/signup" className="border-2 border-white hover:bg-white hover:text-blue-700 font-bold py-3 px-8 rounded-full text-lg shadow-lg transition duration-200">
+                            <Link to="/signup" className="border border-indigo-300 hover:bg-white/10 hover:border-white text-white font-semibold py-3.5 px-8 rounded-full text-lg backdrop-blur-sm transition-all duration-300 transform hover:-translate-y-1">
                                 Create Account
                             </Link>
                         </div>
