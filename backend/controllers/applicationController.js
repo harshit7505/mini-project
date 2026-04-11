@@ -26,7 +26,7 @@ const applyForJob = async (req, res) => {
         const application = await Application.create({
             job: jobId,
             applicant: req.user.id,
-            resumeUrl: req.user.profile.resumeUrl || req.body.resumeUrl
+            resumeUrl: req.user.profile?.resumeUrl || req.body.resumeUrl || 'Not Provided'
         });
 
         res.status(201).json(application);

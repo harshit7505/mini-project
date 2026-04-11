@@ -81,32 +81,13 @@ const Signup = () => {
                             </div>
                         </div>
 
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">I am a:</label>
-                            <div className="flex items-center space-x-6">
-                                <label className="flex items-center">
-                                    <input
-                                        type="radio"
-                                        name="role"
-                                        value="seeker"
-                                        checked={formData.role === 'seeker'}
-                                        onChange={(e) => setFormData({...formData, role: e.target.value})}
-                                        className="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500"
-                                    />
-                                    <span className="ml-2 text-sm text-gray-700">Job Seeker</span>
-                                </label>
-                                <label className="flex items-center">
-                                    <input
-                                        type="radio"
-                                        name="role"
-                                        value="recruiter"
-                                        checked={formData.role === 'recruiter'}
-                                        onChange={(e) => setFormData({...formData, role: e.target.value})}
-                                        className="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500"
-                                    />
-                                    <span className="ml-2 text-sm text-gray-700">Recruiter / Employer</span>
-                                </label>
-                            </div>
+                        {/* Role selection hidden so only Admin/Owner can post jobs. New users default to seeker. */}
+                        <div className="hidden">
+                            <input
+                                type="hidden"
+                                name="role"
+                                value="seeker"
+                            />
                         </div>
 
                         <div>
