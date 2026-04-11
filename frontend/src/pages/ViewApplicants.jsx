@@ -40,6 +40,20 @@ const ViewApplicants = () => {
         }
     };
 
+    const handleStatusChange = async (applicationId, newStatus) => {
+        try {
+            await axios.put(`/api/applications/${applicationId}/status`, { status: newStatus });
+            toast.success(`Application marked as ${newStatus}`);
+            // Update local state to reflect change without re-fetching everything
+            setApplicants(applicants.map(app => 
+                app._id === applicationId ? { ...app, status: newStatus } : app
+            ));
+        } catch (error) {
+            toast.error(error.response?.data?.message || 'Failed to update status');
+            console.error(error);
+        }
+    };
+
     if (loading || authLoading) {
         return (
             <div className="flex justify-center py-20">
@@ -85,9 +99,31 @@ const ViewApplicants = () => {
                                         Applied on: {new Date(app.createdAt).toLocaleDateString()}
                                     </p>
                                 </div>
-                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 capitalize">
-                                    Status: {app.status}
-                                </span>
+                                <div className="text-right flex flex-col gap-2">
+                                    <span className={`inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize 
+                                        ${app.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
+                                        app.status === 'accepted' ? 'bg-green-100 text-green-800' :
+                                        app.status === 'rejected' ? 'bg-red-100 text-red-800' :
+                                        'bg-blue-100 text-blue-800'}`}>
+                                        Status: {app.status}
+                                    </span>
+                                    {app.status === 'pending' && (
+                                        <div className="flex gap-2 mt-1">
+                                            <button 
+                                                onClick={() => handleStatusChange(app._id, 'accepted')}
+                                                className="text-xs bg-green-50 text-green-700 hover:bg-green-100 px-2 py-1 rounded border border-green-200 transition"
+                                            >
+                                                Accept
+                                            </button>
+                                            <button 
+                                                onClick={() => handleStatusChange(app._id, 'rejected')}
+                                                className="text-xs bg-red-50 text-red-700 hover:bg-red-100 px-2 py-1 rounded border border-red-200 transition"
+                                            >
+                                                Reject
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
 
                             <div className="mt-4 pt-4 border-t border-gray-100">

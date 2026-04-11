@@ -82,9 +82,39 @@ const getAppliedJobs = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
-// check commit
+// @desc    Update application status
+// @route   PUT /api/applications/:id/status
+// @access  Private (Recruiter owner only)
+const updateApplicationStatus = async (req, res) => {
+    try {
+        const { status } = req.body;
+        const application = await Application.findById(req.params.id).populate('job');
+
+        if (!application) {
+            return res.status(404).json({ message: 'Application not found' });
+        }
+
+        // Check if user is the recruiter of the job
+        if (application.job.recruiter.toString() !== req.user.id) {
+             return res.status(403).json({ message: 'Not authorized to update this status' });
+        }
+
+        if (!['pending', 'reviewed', 'accepted', 'rejected'].includes(status)) {
+             return res.status(400).json({ message: 'Invalid status' });
+        }
+
+        application.status = status;
+        await application.save();
+
+        res.status(200).json(application);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 module.exports = {
     applyForJob,
     getJobApplicants,
-    getAppliedJobs
+    getAppliedJobs,
+    updateApplicationStatus
 };
