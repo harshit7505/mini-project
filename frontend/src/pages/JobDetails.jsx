@@ -12,6 +12,7 @@ const JobDetails = () => {
     const [job, setJob] = useState(null);
     const [loading, setLoading] = useState(true);
     const [applying, setApplying] = useState(false);
+    const [customResumeUrl, setCustomResumeUrl] = useState('');
 
     useEffect(() => {
         const fetchJob = async () => {
@@ -41,7 +42,7 @@ const JobDetails = () => {
 
         try {
             setApplying(true);
-            await axios.post(`/api/jobs/${id}/apply`);
+            await axios.post(`/api/jobs/${id}/apply`, { resumeUrl: customResumeUrl });
             toast.success('Successfully applied for this job!');
             // Ideally we'd reflect this state locally to prevent double clicks
         } catch (error) {
@@ -91,7 +92,16 @@ const JobDetails = () => {
                                 </span>
                             </div>
                         </div>
-                        <div className="flex flex-col gap-3 min-w-[200px]">
+                        <div className="flex flex-col gap-3 min-w-[250px]">
+                            {user && user.role === 'seeker' && (
+                                <input
+                                    type="url"
+                                    placeholder="Portfolio/Resume Link (Optional)"
+                                    value={customResumeUrl}
+                                    onChange={(e) => setCustomResumeUrl(e.target.value)}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm"
+                                />
+                            )}
                             <button
                                 onClick={handleApply}
                                 disabled={applying || (user && user.role === 'recruiter')}
