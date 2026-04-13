@@ -7,6 +7,7 @@ const Chatbot = () => {
         { id: 1, text: "Hi there! How can I help you find your dream job today?", sender: 'bot' }
     ]);
     const [input, setInput] = useState('');
+    const [isTyping, setIsTyping] = useState(false);
     const messagesEndRef = useRef(null);
 
     const scrollToBottom = () => {
@@ -29,14 +30,30 @@ const Chatbot = () => {
         setInput('');
 
         // Simulate AI bot response
+        setIsTyping(true);
         setTimeout(() => {
+            const text = input.toLowerCase();
+            let responseText = "That's an interesting question! Could you provide a bit more detail about what you're looking for on JobPortal?";
+            
+            if (text.match(/hi|hello|hey/)) responseText = "Hello there! How can I assist you with your career goals today?";
+            else if (text.match(/apply|application/)) responseText = "To apply for a job, navigate to 'Browse Jobs', click on a job you like, and hit the 'Apply Now' button on the details page!";
+            else if (text.match(/post|employer|recruiter/)) responseText = "If you're an employer, you can create a Recruiter account to access the dashboard and post jobs directly.";
+            else if (text.match(/salary|pay|money/)) responseText = "Salary details are listed directly on each job posting. You can filter jobs by salary on the Jobs page.";
+            else if (text.match(/login|signup|account|register/)) responseText = "You can create an account or login using the buttons in the top right corner. We also support Google Login!";
+            else if (text.match(/contact|support|email/)) responseText = "You can reach our main support anytime at agrawalsanskar60@gmail.com or call us at +91 7668879430.";
+            else if (text.match(/resume|cv/)) responseText = "You can upload your resume (PDF/Doc) directly when applying for a specific job, or update it in your Profile section!";
+            else if (text.match(/forgot password|password/)) responseText = "If you forgot your password, please use the 'Forgot Password' link on the login page to reset it.";
+            else if (text.match(/thank/)) responseText = "You're very welcome! Let me know if you need anything else.";
+            else if (text.match(/job|work|intern/)) responseText = "We have thousands of active jobs! Click on 'Browse Jobs' at the top to start searching for your next big opportunity.";
+
             const botMsg = { 
                 id: Date.now() + 1, 
-                text: "Thanks for reaching out! A support representative or our advanced AI will assist you shortly. In the meantime, try browsing our latest jobs!", 
+                text: responseText, 
                 sender: 'bot' 
             };
             setMessages(prev => [...prev, botMsg]);
-        }, 1000);
+            setIsTyping(false);
+        }, 1000 + Math.random() * 800);
     };
 
     return (
@@ -76,6 +93,15 @@ const Chatbot = () => {
                                 </div>
                             </div>
                         ))}
+                        {isTyping && (
+                            <div className="flex justify-start">
+                                <div className="bg-white/10 text-gray-200 p-4 rounded-2xl rounded-bl-none border border-white/5 flex gap-1.5 items-center h-10">
+                                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                                </div>
+                            </div>
+                        )}
                         <div ref={messagesEndRef} />
                     </div>
 
