@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
 import { Toaster } from 'react-hot-toast';
 import { Mail, Phone } from 'lucide-react';
+import Chatbot from './Chatbot';
 
 const Layout = () => {
     return (
@@ -42,6 +43,7 @@ const Layout = () => {
                     </div>
                 </div>
             </footer>
+            <Chatbot />
         </div>
     );
 };
