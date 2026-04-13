@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 import { toast } from 'react-hot-toast';
-import { MapPin, DollarSign, Building, Clock, Briefcase } from 'lucide-react';
+import { MapPin, DollarSign, Building, Clock, Briefcase, Star } from 'lucide-react';
 
 const JobDetails = () => {
     const { id } = useParams();
@@ -13,6 +13,10 @@ const JobDetails = () => {
     const [loading, setLoading] = useState(true);
     const [applying, setApplying] = useState(false);
     const [resumeFile, setResumeFile] = useState(null);
+    const [hasApplied, setHasApplied] = useState(false);
+    const [showRatingModal, setShowRatingModal] = useState(false);
+    const [rating, setRating] = useState(0);
+    const [hoverRating, setHoverRating] = useState(0);
 
     useEffect(() => {
         const fetchJob = async () => {
@@ -54,6 +58,7 @@ const JobDetails = () => {
                 }
             });
             toast.success('Successfully applied for this job!');
+            setHasApplied(true);
             // Ideally we'd reflect this state locally to prevent double clicks
         } catch (error) {
             toast.error(error.response?.data?.message || 'Failed to apply');
@@ -81,9 +86,20 @@ const JobDetails = () => {
 
     return (
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            <Link to="/jobs" className="text-sm text-blue-600 hover:text-blue-800 mb-6 inline-block">
+            <button 
+                onClick={(e) => {
+                    e.preventDefault();
+                    if (hasApplied) {
+                        setShowRatingModal(true);
+                    } else {
+                        navigate("/jobs");
+                    }
+                }} 
+                className="text-sm text-blue-600 hover:text-blue-800 mb-6 flex items-center font-medium transition-colors"
+                title="Back to jobs"
+            >
                 &larr; Back to jobs
-            </Link>
+            </button>
 
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                 {/* Header */}
@@ -167,6 +183,62 @@ const JobDetails = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Rating Modal */}
+            {showRatingModal && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+                    <div className="bg-slate-900 border border-white/10 p-8 rounded-2xl shadow-2xl max-w-sm w-full text-center transform transition-all animate-in fade-in zoom-in duration-200">
+                        <h3 className="text-2xl font-bold text-white mb-2">Rate your experience</h3>
+                        <p className="text-gray-400 mb-6 text-sm">How easy was it to apply for this job?</p>
+                        
+                        <div className="flex justify-center gap-2 mb-8">
+                            {[1, 2, 3, 4, 5].map((starIdx) => (
+                                <button
+                                    key={starIdx}
+                                    onMouseEnter={() => setHoverRating(starIdx)}
+                                    onMouseLeave={() => setHoverRating(0)}
+                                    onClick={() => setRating(starIdx)}
+                                    className="focus:outline-none transition-transform hover:scale-110"
+                                >
+                                    <Star 
+                                        className={`w-10 h-10 ${
+                                            (hoverRating || rating) >= starIdx 
+                                            ? 'text-yellow-400 fill-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]' 
+                                            : 'text-gray-700 hover:text-gray-500'
+                                        }`} 
+                                    />
+                                </button>
+                            ))}
+                        </div>
+
+                        <div className="flex flex-col gap-3">
+                            <button
+                                onClick={() => {
+                                    if(rating > 0) {
+                                        toast.success("Thank you for your feedback!");
+                                        setShowRatingModal(false);
+                                        navigate("/jobs");
+                                    } else {
+                                        toast.error("Please select a rating first!");
+                                    }
+                                }}
+                                className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 rounded-xl transition-colors shadow-lg shadow-indigo-500/30"
+                            >
+                                Submit Rating
+                            </button>
+                            <button
+                                onClick={() => {
+                                    setShowRatingModal(false);
+                                    navigate("/jobs");
+                                }}
+                                className="w-full bg-transparent hover:bg-white/5 text-gray-400 font-medium py-3 rounded-xl transition-colors border border-transparent hover:border-white/10"
+                            >
+                                Skip
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
