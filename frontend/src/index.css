@@ -8,8 +8,10 @@
 
 body {
   font-family: var(--font-sans);
-  background-color: #f3f4f6; /* softer gray-100 */
-  color: #1f2937; /* softer gray-800 instead of harsh black */
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  background-attachment: fixed;
+  color: #cbd5e1; /* slate-300 */
   margin: 0;
   padding: 0;
+  min-height: 100vh;
 }

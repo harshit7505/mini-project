@@ -28,46 +28,46 @@ const Home = () => {
             </div>
 
             {/* Stats Section */}
-            <div className="bg-white py-12 border-b border-gray-200">
+            <div className="py-12 border-b border-indigo-500/20 bg-slate-900/30 backdrop-blur-md">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center relative z-10">
                         <div className="p-6">
-                            <Briefcase className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-                            <h3 className="text-3xl font-bold text-gray-900">10,000+</h3>
-                            <p className="text-gray-500 mt-2 text-lg">Active Jobs</p>
+                            <Briefcase className="w-12 h-12 text-indigo-400 mx-auto mb-4 drop-shadow-md" />
+                            <h3 className="text-3xl font-bold text-white">10,000+</h3>
+                            <p className="text-indigo-200 mt-2 text-lg font-light">Active Jobs</p>
                         </div>
-                        <div className="p-6 border-t border-b md:border-t-0 md:border-b-0 md:border-l md:border-r border-gray-200">
-                            <Building className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-                            <h3 className="text-3xl font-bold text-gray-900">1,500+</h3>
-                            <p className="text-gray-500 mt-2 text-lg">Companies</p>
+                        <div className="p-6 border-t border-b md:border-t-0 md:border-b-0 md:border-l md:border-r border-indigo-500/20">
+                            <Building className="w-12 h-12 text-indigo-400 mx-auto mb-4 drop-shadow-md" />
+                            <h3 className="text-3xl font-bold text-white">1,500+</h3>
+                            <p className="text-indigo-200 mt-2 text-lg font-light">Companies</p>
                         </div>
                         <div className="p-6">
-                            <Search className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-                            <h3 className="text-3xl font-bold text-gray-900">100k+</h3>
-                            <p className="text-gray-500 mt-2 text-lg">Active Users</p>
+                            <Search className="w-12 h-12 text-indigo-400 mx-auto mb-4 drop-shadow-md" />
+                            <h3 className="text-3xl font-bold text-white">100k+</h3>
+                            <p className="text-indigo-200 mt-2 text-lg font-light">Active Users</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             {/* Features Info */}
-            <div className="py-16 bg-slate-50">
+            <div className="py-16">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold text-gray-900">Why choose JobPortal?</h2>
+                        <h2 className="text-3xl font-bold text-white tracking-wide">Why choose JobPortal?</h2>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition">
-                            <h3 className="text-xl font-semibold mb-3">For Job Seekers</h3>
-                            <p className="text-gray-600">Create a profile, upload your resume, and apply to jobs with a single click. Track your application status in real-time.</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+                        <div className="bg-white/5 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-white/10 hover:border-indigo-400/50 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                            <h3 className="text-xl font-bold mb-3 text-indigo-100">For Job Seekers</h3>
+                            <p className="text-indigo-200/80 font-light leading-relaxed">Create a profile, upload your resume, and apply to jobs with a single click. Track your application status in real-time.</p>
                         </div>
-                        <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition">
-                            <h3 className="text-xl font-semibold mb-3">For Employers</h3>
-                            <p className="text-gray-600">Post jobs, manage applications, and find the best candidates using our streamlined recruiter dashboard.</p>
+                        <div className="bg-white/5 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-white/10 hover:border-indigo-400/50 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                            <h3 className="text-xl font-bold mb-3 text-indigo-100">For Employers</h3>
+                            <p className="text-indigo-200/80 font-light leading-relaxed">Post jobs, manage applications, and find the best candidates using our streamlined recruiter dashboard.</p>
                         </div>
-                        <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition">
-                            <h3 className="text-xl font-semibold mb-3">Fast & Secure</h3>
-                            <p className="text-gray-600">Built with modern web technologies, ensuring a fast browsing experience and comprehensive data security.</p>
+                        <div className="bg-white/5 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-white/10 hover:border-indigo-400/50 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                            <h3 className="text-xl font-bold mb-3 text-indigo-100">Fast & Secure</h3>
+                            <p className="text-indigo-200/80 font-light leading-relaxed">Built with modern web technologies, ensuring a fast browsing experience and comprehensive data security.</p>
                         </div>
                     </div>
                 </div>
