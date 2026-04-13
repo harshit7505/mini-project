@@ -1,5 +1,6 @@
 const Application = require('../models/Application');
 const Job = require('../models/Job');
+const sendDecisionEmail = require('../utils/sendEmail');
 
 // @desc    Apply for a job
 // @route   POST /api/jobs/:jobId/apply
@@ -88,7 +89,9 @@ const getAppliedJobs = async (req, res) => {
 const updateApplicationStatus = async (req, res) => {
     try {
         const { status } = req.body;
-        const application = await Application.findById(req.params.id).populate('job');
+        const application = await Application.findById(req.params.id)
+            .populate('job')
+            .populate('applicant', 'name email');
 
         if (!application) {
             return res.status(404).json({ message: 'Application not found' });
@@ -105,6 +108,17 @@ const updateApplicationStatus = async (req, res) => {
 
         application.status = status;
         await application.save();
+
+        // Send Email Notification (non-blocking)
+        if ((status === 'accepted' || status === 'rejected') && application.applicant?.email) {
+            sendDecisionEmail({
+                to: application.applicant.email,
+                name: application.applicant.name,
+                jobTitle: application.job.title,
+                companyName: application.job.companyName,
+                status: status
+            });
+        }
 
         res.status(200).json(application);
     } catch (error) {
