@@ -23,7 +23,7 @@ const storage = new CloudinaryStorage({
     // and keep the .pdf extension in the URL.
     if (ext === 'pdf') {
       params.format = 'pdf';
-      params.resource_type = 'image'; // Cloudinary handles PDFs under 'image' resource type when formatted
+      params.resource_type = 'raw'; // Must use 'raw' for PDFs due to modern Cloudinary HTTP restrictions
     } 
     // For other documents, use raw to prevent image conversion attempts
     else if (['doc', 'docx', 'txt'].includes(ext)) {
