@@ -65,11 +65,11 @@ const Dashboard = () => {
 
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            <h1 className="text-3xl font-bold text-gray-900 mb-8">Dashboard</h1>
+            <h1 className="text-3xl font-bold text-white mb-8">Dashboard</h1>
 
             {user.role === 'seeker' ? (
                 <div>
-                    <h2 className="text-xl font-semibold mb-4 text-gray-700">Your Applied Jobs</h2>
+                    <h2 className="text-xl font-semibold mb-4 text-gray-200">Your Applied Jobs</h2>
                     {data.length === 0 ? (
                         <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-200 text-center">
                             <Briefcase className="w-12 h-12 text-gray-400 mx-auto mb-4" />
@@ -112,7 +112,7 @@ const Dashboard = () => {
             ) : (
                 <div>
                     <div className="flex justify-between items-center mb-4">
-                        <h2 className="text-xl font-semibold text-gray-700">Your Posted Jobs</h2>
+                        <h2 className="text-xl font-semibold text-gray-200">Your Posted Jobs</h2>
                         <Link to="/jobs/new" className="bg-blue-600 text-white px-4 py-2 text-sm rounded-md font-medium hover:bg-blue-700">
                             Post New Job
                         </Link>
