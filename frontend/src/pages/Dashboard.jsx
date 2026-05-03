@@ -69,36 +69,36 @@ const Dashboard = () => {
 
             {user.role === 'seeker' ? (
                 <div>
-                    <h2 className="text-xl font-semibold mb-4 text-gray-200">Your Applied Jobs</h2>
+                    <h2 className="text-xl font-semibold mb-4 text-gray-200 drop-shadow-sm">Your Applied Jobs</h2>
                     {data.length === 0 ? (
-                        <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-200 text-center">
-                            <Briefcase className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                            <h3 className="text-lg font-medium text-gray-900 mb-2">No applications yet</h3>
-                            <p className="text-gray-500 mb-6">You haven't applied to any jobs yet. Start exploring!</p>
-                            <Link to="/jobs" className="bg-blue-600 text-white px-6 py-2 rounded-md font-medium hover:bg-blue-700">
+                        <div className="glass-panel p-8 rounded-2xl text-center">
+                            <Briefcase className="w-12 h-12 text-indigo-400 mx-auto mb-4 drop-shadow-sm" />
+                            <h3 className="text-lg font-medium text-white mb-2">No applications yet</h3>
+                            <p className="text-indigo-200 mb-6">You haven't applied to any jobs yet. Start exploring!</p>
+                            <Link to="/jobs" className="bg-indigo-600/90 border border-indigo-500/50 text-white px-6 py-2 rounded-lg font-medium hover:bg-indigo-500 transition-colors shadow-lg">
                                 Browse Jobs
                             </Link>
                         </div>
                     ) : (
-                        <div className="bg-white shadow-sm rounded-lg overflow-hidden border border-gray-200">
-                            <ul className="divide-y divide-gray-200">
+                        <div className="glass-panel rounded-2xl overflow-hidden shadow-2xl">
+                            <ul className="divide-y divide-white/10">
                                 {data.map((app) => (
-                                    <li key={app._id} className="p-4 sm:p-6 hover:bg-gray-50 flex flex-col sm:flex-row justify-between sm:items-center">
+                                    <li key={app._id} className="p-4 sm:p-6 hover:bg-white/5 flex flex-col sm:flex-row justify-between sm:items-center transition-colors">
                                         <div>
-                                            <h4 className="text-lg font-medium text-blue-600">
+                                            <h4 className="text-lg font-medium text-indigo-300 hover:text-indigo-100 transition-colors">
                                                 <Link to={`/jobs/${app.job._id}`}>{app.job.title}</Link>
                                             </h4>
-                                            <p className="text-gray-600 mt-1">{app.job.companyName} • {app.job.location}</p>
-                                            <p className="text-sm text-gray-500 mt-2">
+                                            <p className="text-indigo-100 mt-1">{app.job.companyName} • {app.job.location}</p>
+                                            <p className="text-sm text-indigo-300 mt-2">
                                                 Applied on: {new Date(app.createdAt).toLocaleDateString()}
                                             </p>
                                         </div>
                                         <div className="mt-4 sm:mt-0">
-                                            <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium capitalize
-                                                ${app.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
-                                                app.status === 'accepted' ? 'bg-green-100 text-green-800' :
-                                                app.status === 'rejected' ? 'bg-red-100 text-red-800' :
-                                                'bg-blue-100 text-blue-800'}`}
+                                            <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium capitalize border backdrop-blur-sm
+                                                ${app.status === 'pending' ? 'bg-yellow-500/20 text-yellow-200 border-yellow-500/30' :
+                                                app.status === 'accepted' ? 'bg-green-500/20 text-green-200 border-green-500/30' :
+                                                app.status === 'rejected' ? 'bg-red-500/20 text-red-200 border-red-500/30' :
+                                                'bg-indigo-500/20 text-indigo-200 border-indigo-500/30'}`}
                                             >
                                                 {app.status}
                                             </span>
@@ -112,45 +112,45 @@ const Dashboard = () => {
             ) : (
                 <div>
                     <div className="flex justify-between items-center mb-4">
-                        <h2 className="text-xl font-semibold text-gray-200">Your Posted Jobs</h2>
-                        <Link to="/jobs/new" className="bg-blue-600 text-white px-4 py-2 text-sm rounded-md font-medium hover:bg-blue-700">
+                        <h2 className="text-xl font-semibold text-gray-200 drop-shadow-sm">Your Posted Jobs</h2>
+                        <Link to="/jobs/new" className="bg-indigo-600/90 border border-indigo-500/50 text-white px-4 py-2 text-sm rounded-lg font-medium hover:bg-indigo-500 transition-colors shadow-lg">
                             Post New Job
                         </Link>
                     </div>
 
                     {data.length === 0 ? (
-                        <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-200 text-center">
-                            <Briefcase className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                            <h3 className="text-lg font-medium text-gray-900 mb-2">No jobs posted</h3>
-                            <p className="text-gray-500 mb-6">You haven't posted any jobs yet. Create your first job posting!</p>
+                        <div className="glass-panel p-8 rounded-2xl text-center">
+                            <Briefcase className="w-12 h-12 text-indigo-400 mx-auto mb-4 drop-shadow-sm" />
+                            <h3 className="text-lg font-medium text-white mb-2">No jobs posted</h3>
+                            <p className="text-indigo-200 mb-6">You haven't posted any jobs yet. Create your first job posting!</p>
                         </div>
                     ) : (
-                        <div className="bg-white shadow-sm rounded-lg overflow-hidden border border-gray-200">
-                            <ul className="divide-y divide-gray-200">
+                        <div className="glass-panel rounded-2xl overflow-hidden shadow-2xl">
+                            <ul className="divide-y divide-white/10">
                                 {data.map((job) => (
-                                    <li key={job._id} className="p-4 sm:p-6 hover:bg-gray-50 flex flex-col sm:flex-row justify-between sm:items-center">
+                                    <li key={job._id} className="p-4 sm:p-6 hover:bg-white/5 flex flex-col sm:flex-row justify-between sm:items-center transition-colors">
                                         <div>
-                                            <h4 className="text-lg font-medium text-gray-900">
+                                            <h4 className="text-lg font-medium text-white hover:text-indigo-300 transition-colors">
                                                 <Link to={`/jobs/${job._id}`}>{job.title}</Link>
                                             </h4>
-                                            <p className="text-gray-600 mt-1">{job.location} • {job.jobType}</p>
-                                            <p className="text-sm text-gray-500 mt-2">
+                                            <p className="text-indigo-100 mt-1">{job.location} • {job.jobType}</p>
+                                            <p className="text-sm text-indigo-300 mt-2">
                                                 Posted: {new Date(job.createdAt).toLocaleDateString()}
                                             </p>
                                         </div>
                                         <div className="mt-4 sm:mt-0 flex gap-3">
                                             <Link 
                                                 to={`/jobs/${job._id}/applicants`}
-                                                className="inline-flex items-center text-blue-600 hover:text-blue-900 bg-blue-50 px-3 py-1 rounded-md"
+                                                className="inline-flex items-center text-indigo-200 bg-indigo-500/20 border border-indigo-500/30 hover:bg-indigo-500/40 hover:text-white px-3 py-1.5 rounded-lg transition-colors text-sm font-medium"
                                             >
-                                                <Eye className="w-4 h-4 mr-1"/>
+                                                <Eye className="w-4 h-4 mr-1.5"/>
                                                 Applicants
                                             </Link>
                                             <button 
                                                 onClick={() => handleDeleteJob(job._id)}
-                                                className="inline-flex items-center text-red-600 hover:text-red-900 bg-red-50 px-3 py-1 rounded-md"
+                                                className="inline-flex items-center text-red-200 bg-red-500/20 border border-red-500/30 hover:bg-red-500/40 hover:text-white px-3 py-1.5 rounded-lg transition-colors text-sm font-medium"
                                             >
-                                                <Trash2 className="w-4 h-4 mr-1"/>
+                                                <Trash2 className="w-4 h-4 mr-1.5"/>
                                                 Delete
                                             </button>
                                         </div>

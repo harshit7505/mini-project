@@ -51,48 +51,48 @@ const PostJob = () => {
 
     return (
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            <h1 className="text-3xl font-bold text-gray-900 mb-8">Post a New Job</h1>
+            <h1 className="text-3xl font-bold text-white drop-shadow-md mb-8">Post a New Job</h1>
 
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div className="glass-panel rounded-2xl shadow-2xl overflow-hidden">
                 <div className="p-6 md:p-8">
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Job Title</label>
+                            <label className="block text-sm font-medium text-indigo-100 mb-1">Job Title</label>
                             <input
                                 type="text"
                                 required
                                 placeholder="e.g. Senior React Developer"
                                 value={formData.title}
                                 onChange={(e) => setFormData({...formData, title: e.target.value})}
-                                className="block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                className="block w-full rounded-lg border border-white/20 bg-white/5 px-3 py-2 text-white placeholder-indigo-300/50 shadow-sm focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 sm:text-sm transition-all"
                             />
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Company Name</label>
+                            <label className="block text-sm font-medium text-indigo-100 mb-1">Company Name</label>
                             <input
                                 type="text"
                                 required
                                 value={formData.companyName}
                                 onChange={(e) => setFormData({...formData, companyName: e.target.value})}
-                                className="block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                className="block w-full rounded-lg border border-white/20 bg-white/5 px-3 py-2 text-white placeholder-indigo-300/50 shadow-sm focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 sm:text-sm transition-all"
                             />
                         </div>
 
                         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                                <label className="block text-sm font-medium text-indigo-100 mb-1">Location</label>
                                 <input
                                     type="text"
                                     required
                                     placeholder="e.g. Remote, New York, NY"
                                     value={formData.location}
                                     onChange={(e) => setFormData({...formData, location: e.target.value})}
-                                    className="block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                    className="block w-full rounded-lg border border-white/20 bg-white/5 px-3 py-2 text-white placeholder-indigo-300/50 shadow-sm focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 sm:text-sm transition-all"
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Annual Salary ($)</label>
+                                <label className="block text-sm font-medium text-indigo-100 mb-1">Annual Salary ($)</label>
                                 <input
                                     type="number"
                                     required
@@ -100,17 +100,17 @@ const PostJob = () => {
                                     placeholder="e.g. 120000"
                                     value={formData.salary}
                                     onChange={(e) => setFormData({...formData, salary: e.target.value})}
-                                    className="block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                    className="block w-full rounded-lg border border-white/20 bg-white/5 px-3 py-2 text-white placeholder-indigo-300/50 shadow-sm focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 sm:text-sm transition-all"
                                 />
                             </div>
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Job Type</label>
+                            <label className="block text-sm font-medium text-indigo-100 mb-1">Job Type</label>
                             <select
                                 value={formData.jobType}
                                 onChange={(e) => setFormData({...formData, jobType: e.target.value})}
-                                className="block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                className="block w-full rounded-lg border border-white/20 bg-black/40 px-3 py-2 text-white shadow-sm focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 sm:text-sm transition-all"
                             >
                                 <option value="Full-time">Full-time</option>
                                 <option value="Part-time">Part-time</option>
@@ -120,14 +120,14 @@ const PostJob = () => {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Job Description</label>
+                            <label className="block text-sm font-medium text-indigo-100 mb-1">Job Description</label>
                             <textarea
                                 required
                                 rows="6"
                                 placeholder="Describe the role, responsibilities, and requirements..."
                                 value={formData.description}
                                 onChange={(e) => setFormData({...formData, description: e.target.value})}
-                                className="block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                className="block w-full rounded-lg border border-white/20 bg-white/5 px-3 py-2 text-white placeholder-indigo-300/50 shadow-sm focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400 sm:text-sm transition-all"
                             />
                         </div>
 
@@ -135,14 +135,14 @@ const PostJob = () => {
                             <button
                                 type="button"
                                 onClick={() => navigate('/dashboard')}
-                                className="bg-white text-gray-700 border border-gray-300 font-medium py-2 px-6 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition mr-3"
+                                className="bg-white/5 text-indigo-200 border border-white/20 font-medium py-2.5 px-6 rounded-lg shadow-sm hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-slate-900 transition-colors mr-3"
                             >
                                 Cancel
                             </button>
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="bg-blue-600 text-white font-medium py-2 px-6 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 transition"
+                                className="bg-indigo-600/90 text-white font-medium py-2.5 px-6 rounded-lg border border-indigo-500/50 shadow-lg hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-slate-900 disabled:opacity-50 transition-all"
                             >
                                 {loading ? 'Posting...' : 'Post Job'}
                             </button>

@@ -5,8 +5,8 @@ const Home = () => {
     return (
         <div>
             {/* Hero Section */}
-            <div className="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white relative overflow-hidden">
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
+            <div className="text-white relative overflow-hidden">
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 mix-blend-overlay"></div>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 relative z-10">
                     <div className="text-center">
                         <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-100 to-indigo-200 drop-shadow-sm">
@@ -28,7 +28,7 @@ const Home = () => {
             </div>
 
             {/* Stats Section */}
-            <div className="py-12 border-b border-indigo-500/20 bg-slate-900/30 backdrop-blur-md">
+            <div className="py-12 border-y border-white/10 glass-panel">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center relative z-10">
                         <div className="p-6">
@@ -57,15 +57,15 @@ const Home = () => {
                         <h2 className="text-3xl font-bold text-white tracking-wide">Why choose JobPortal?</h2>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
-                        <div className="bg-white/5 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-white/10 hover:border-indigo-400/50 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                        <div className="glass-card p-8 rounded-2xl hover:border-indigo-400/50 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
                             <h3 className="text-xl font-bold mb-3 text-indigo-100">For Job Seekers</h3>
                             <p className="text-indigo-200/80 font-light leading-relaxed">Create a profile, upload your resume, and apply to jobs with a single click. Track your application status in real-time.</p>
                         </div>
-                        <div className="bg-white/5 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-white/10 hover:border-indigo-400/50 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                        <div className="glass-card p-8 rounded-2xl hover:border-indigo-400/50 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
                             <h3 className="text-xl font-bold mb-3 text-indigo-100">For Employers</h3>
                             <p className="text-indigo-200/80 font-light leading-relaxed">Post jobs, manage applications, and find the best candidates using our streamlined recruiter dashboard.</p>
                         </div>
-                        <div className="bg-white/5 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-white/10 hover:border-indigo-400/50 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                        <div className="glass-card p-8 rounded-2xl hover:border-indigo-400/50 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
                             <h3 className="text-xl font-bold mb-3 text-indigo-100">Fast & Secure</h3>
                             <p className="text-indigo-200/80 font-light leading-relaxed">Built with modern web technologies, ensuring a fast browsing experience and comprehensive data security.</p>
                         </div>

@@ -77,9 +77,9 @@ const JobDetails = () => {
 
     if (!job) {
         return (
-            <div className="max-w-3xl mx-auto px-4 py-20 text-center">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Job not found</h2>
-                <Link to="/jobs" className="text-blue-600 hover:text-blue-800">Back to all jobs</Link>
+            <div className="max-w-3xl mx-auto px-4 py-20 text-center glass-panel mt-10 rounded-2xl">
+                <h2 className="text-2xl font-bold text-white mb-4">Job not found</h2>
+                <Link to="/jobs" className="text-indigo-400 hover:text-indigo-300">Back to all jobs</Link>
             </div>
         );
     }
@@ -95,25 +95,25 @@ const JobDetails = () => {
                         navigate("/jobs");
                     }
                 }} 
-                className="text-sm text-blue-600 hover:text-blue-800 mb-6 flex items-center font-medium transition-colors"
+                className="text-sm text-indigo-300 hover:text-indigo-100 mb-6 flex items-center font-medium transition-colors"
                 title="Back to jobs"
             >
                 &larr; Back to jobs
             </button>
 
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div className="glass-panel rounded-2xl shadow-2xl overflow-hidden">
                 {/* Header */}
-                <div className="p-6 md:p-8 border-b border-gray-200 bg-slate-50">
+                <div className="p-6 md:p-8 border-b border-white/10 bg-white/5">
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                         <div>
-                            <h1 className="text-3xl font-bold text-gray-900 mb-2">{job.title}</h1>
-                            <div className="flex flex-wrap items-center gap-4 text-gray-600">
+                            <h1 className="text-3xl font-bold text-white drop-shadow-md mb-2">{job.title}</h1>
+                            <div className="flex flex-wrap items-center gap-4 text-indigo-200">
                                 <span className="flex items-center">
-                                    <Building className="h-5 w-5 mr-1" />
+                                    <Building className="h-5 w-5 mr-1 text-indigo-400" />
                                     {job.companyName}
                                 </span>
                                 <span className="flex items-center">
-                                    <MapPin className="h-5 w-5 mr-1" />
+                                    <MapPin className="h-5 w-5 mr-1 text-indigo-400" />
                                     {job.location}
                                 </span>
                             </div>
@@ -121,19 +121,19 @@ const JobDetails = () => {
                         <div className="flex flex-col gap-3 min-w-[250px]">
                             {user && user.role === 'seeker' && (
                                 <div className="space-y-1">
-                                    <label className="block text-sm font-medium text-gray-700">Upload Resume (Optional)</label>
+                                    <label className="block text-sm font-medium text-indigo-100">Upload Resume (Optional)</label>
                                     <input
                                         type="file"
                                         accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
                                         onChange={(e) => setResumeFile(e.target.files[0])}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm bg-white cursor-pointer"
+                                        className="w-full px-3 py-2 border border-white/20 bg-white/5 text-white rounded-md focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-sm cursor-pointer"
                                     />
                                 </div>
                             )}
                             <button
                                 onClick={handleApply}
                                 disabled={applying || (user && user.role === 'recruiter')}
-                                className="w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-sm hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition"
+                                className="w-full bg-indigo-600/90 border border-indigo-500/50 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                             >
                                 {applying ? 'Applying...' : 'Apply Now'}
                             </button>
@@ -142,26 +142,26 @@ const JobDetails = () => {
                 </div>
 
                 {/* Details grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 border-b border-gray-200">
-                    <div className="p-6 border-b md:border-b-0 md:border-r border-gray-200 flex items-start gap-4">
-                        <DollarSign className="h-8 w-8 text-blue-500 shrink-0" />
+                <div className="grid grid-cols-1 md:grid-cols-3 border-b border-white/10">
+                    <div className="p-6 border-b md:border-b-0 md:border-r border-white/10 flex items-start gap-4">
+                        <DollarSign className="h-8 w-8 text-indigo-400 shrink-0" />
                         <div>
-                            <p className="text-sm text-gray-500 font-medium">Salary</p>
-                            <p className="text-lg font-semibold text-gray-900">${job.salary?.toLocaleString()}</p>
+                            <p className="text-sm text-indigo-300 font-medium">Salary</p>
+                            <p className="text-lg font-semibold text-white">${job.salary?.toLocaleString()}</p>
                         </div>
                     </div>
-                    <div className="p-6 border-b md:border-b-0 md:border-r border-gray-200 flex items-start gap-4">
-                        <Briefcase className="h-8 w-8 text-blue-500 shrink-0" />
+                    <div className="p-6 border-b md:border-b-0 md:border-r border-white/10 flex items-start gap-4">
+                        <Briefcase className="h-8 w-8 text-indigo-400 shrink-0" />
                         <div>
-                            <p className="text-sm text-gray-500 font-medium">Job Type</p>
-                            <p className="text-lg font-semibold text-gray-900">{job.jobType}</p>
+                            <p className="text-sm text-indigo-300 font-medium">Job Type</p>
+                            <p className="text-lg font-semibold text-white">{job.jobType}</p>
                         </div>
                     </div>
                     <div className="p-6 flex items-start gap-4">
-                        <Clock className="h-8 w-8 text-blue-500 shrink-0" />
+                        <Clock className="h-8 w-8 text-indigo-400 shrink-0" />
                         <div>
-                            <p className="text-sm text-gray-500 font-medium">Posted</p>
-                            <p className="text-lg font-semibold text-gray-900">
+                            <p className="text-sm text-indigo-300 font-medium">Posted</p>
+                            <p className="text-lg font-semibold text-white">
                                 {new Date(job.createdAt).toLocaleDateString()}
                             </p>
                         </div>
@@ -170,14 +170,14 @@ const JobDetails = () => {
 
                 {/* Description */}
                 <div className="p-6 md:p-8">
-                    <h3 className="text-xl font-bold text-gray-900 mb-4">Job Description</h3>
-                    <div className="prose max-w-none text-gray-700 whitespace-pre-line">
+                    <h3 className="text-xl font-bold text-white mb-4">Job Description</h3>
+                    <div className="prose max-w-none text-indigo-100/90 whitespace-pre-line">
                         {job.description}
                     </div>
 
-                    <div className="mt-10 pt-8 border-t border-gray-200">
-                        <h3 className="text-xl font-bold text-gray-900 mb-4">About {job.companyName}</h3>
-                        <p className="text-gray-700 whitespace-pre-line">
+                    <div className="mt-10 pt-8 border-t border-white/10">
+                        <h3 className="text-xl font-bold text-white mb-4">About {job.companyName}</h3>
+                        <p className="text-indigo-100/90 whitespace-pre-line">
                             {job.recruiter?.profile?.companyDescription || 'No company description provided.'}
                         </p>
                     </div>
