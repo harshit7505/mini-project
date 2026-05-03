@@ -3,7 +3,7 @@ import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
-import { Briefcase, Eye, Trash2 } from 'lucide-react';
+import { Briefcase, Eye, Trash2, Edit } from 'lucide-react';
 
 const Dashboard = () => {
     const { user, loading: authLoading } = useContext(AuthContext);
@@ -145,6 +145,13 @@ const Dashboard = () => {
                                             >
                                                 <Eye className="w-4 h-4 mr-1.5"/>
                                                 Applicants
+                                            </Link>
+                                            <Link 
+                                                to={`/jobs/${job._id}/edit`}
+                                                className="inline-flex items-center text-blue-200 bg-blue-500/20 border border-blue-500/30 hover:bg-blue-500/40 hover:text-white px-3 py-1.5 rounded-lg transition-colors text-sm font-medium"
+                                            >
+                                                <Edit className="w-4 h-4 mr-1.5"/>
+                                                Edit
                                             </Link>
                                             <button 
                                                 onClick={() => handleDeleteJob(job._id)}
